@@ -1,3 +1,4 @@
+# Algorithm to predict the SDI values for 2019 based on the DCI (2019 and 2020), SDI(2020), and Cases per 1000 people
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
