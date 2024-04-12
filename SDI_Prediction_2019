@@ -16,7 +16,7 @@ df = pd.DataFrame(data)
 
 # Asking users for new input
 new_dci = float(input("Enter the 2019 DCI value: "))
-new_cases_per_1000 = float(input("Enter the Cases Per 1000 value: "))
+new_cases_per_1000 = float(input("Enter the corresponding Cases Per 1000 value: "))
 
 # Calculating the coefficients for the linear regression model
 X = np.array(df[['DCI', 'CasesPer1000']])
