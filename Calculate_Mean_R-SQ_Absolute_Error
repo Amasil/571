@@ -1,0 +1,32 @@
+# Algorithm to calculate the Mean Squared Error, R-squared, and Mean Absolute Error.
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+
+# Actual SDI values from the table
+actual_sdi_2019 = [72.4, 77.9, 73.2, 69.6, 85.2, 78.9, 79.5, 61.5, 85.0, 78.8, 74.5]
+actual_sdi_2020 = [73.2, 78.2, 73.9, 70.9, 84.6, 79.2, 79.2, 63.4, 84.7, 84.7, 76.4]
+
+# Predicted SDI values from the table
+predicted_sdi_2019 = [71.7, 80.4, 78.8, 71.7, 81.5, 78.4, 79.2, 72.9, 81.7, 81.4, 82.7]
+predicted_sdi_2020 = [65.2, 79, 77.6, 64.7, 80.5, 74.8, 75.6, 66, 79.9, 78.8, 80.3]
+
+# Calculate error metrics for 2019
+r2_2019 = r2_score(actual_sdi_2019, predicted_sdi_2019)
+mse_2019 = mean_squared_error(actual_sdi_2019, predicted_sdi_2019)
+mae_2019 = mean_absolute_error(actual_sdi_2019, predicted_sdi_2019)
+
+# Calculate error metrics for 2020
+r2_2020 = r2_score(actual_sdi_2020, predicted_sdi_2020)
+mse_2020 = mean_squared_error(actual_sdi_2020, predicted_sdi_2020)
+mae_2020 = mean_absolute_error(actual_sdi_2020, predicted_sdi_2020)
+
+# Print error metrics
+print("Error Metrics for 2019:")
+print("R-squared (R2):", r2_2019)
+print("Mean Squared Error (MSE):", mse_2019)
+print("Mean Absolute Error (MAE):", mae_2019)
+print()
+print("Error Metrics for 2020:")
+print("R-squared (R2):", r2_2020)
+print("Mean Squared Error (MSE):", mse_2020)
+print("Mean Absolute Error (MAE):", mae_2020)

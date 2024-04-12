@@ -1,0 +1,52 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Data
+data = {
+    'Country': ['Argentina', 'Canada', 'China', 'Colombia', 'Denmark', 'Japan', 'New Zealand',
+                'South Africa', 'Sweden', 'Switzerland', 'USA'],
+    'DCI': [48.784, 90.482, 84.105, 46.450, 96.013, 75.099, 77.690, 48.353, 95.146, 93.693, 100.000],
+    'CasesPer1000': [26.65, 6.57, 0.07, 22.96, 8.70, 0.83, 0.39, 13.29, 13.35, 22.45, 28.60],  # Values for COVID-19 cases per 1000 people
+    'SDI': [73.2, 78.2, 73.9, 70.9, 84.6, 79.2, 79.2, 63.4, 84.7, 84.7, 76.4]  # Values for Sustainable Development Index
+}
+
+df = pd.DataFrame(data)
+
+# Calculating the coefficients for the linear regression model
+X = np.array(df[['DCI', 'CasesPer1000']])
+y = np.array(df['SDI'])
+
+# Adding a column of ones to X for the intercept term
+X_with_intercept = np.column_stack([np.ones(X.shape[0]), X])
+
+# Calculating the coefficients using the normal equation
+beta = np.linalg.inv(X_with_intercept.T.dot(X_with_intercept)).dot(X_with_intercept.T).dot(y)
+
+# Making predictions
+y_pred = X_with_intercept.dot(beta)
+
+# Visualizing the relationship between DCI, CasesPer1000, and SDI
+plt.figure(figsize=(10, 6))
+plt.scatter(df['DCI'], df['SDI'], color='blue', label='Actual')
+plt.scatter(df['DCI'], y_pred, color='red', label='Predicted')
+plt.xlabel('Digital Competitive Index (DCI)')
+plt.ylabel('Sustainable Development Index (SDI)')
+plt.title('Actual vs. Predicted SDI based on DCI')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Printing model coefficients
+print('Model Coefficients:')
+print('Intercept:', beta[0])
+print('DCI Coefficient:', beta[1])
+print('CasesPer1000 Coefficient:', beta[2])
+
+# Asking users for new input
+new_dci = float(input("Enter the new DCI value: "))
+new_cases_per_1000 = float(input("Enter the new Cases Per 1000 value: "))
+
+# Predict SDI using the trained model
+new_sdi_pred = beta[0] + beta[1] * new_dci + beta[2] * new_cases_per_1000
+print('Predicted SDI for new data:', new_sdi_pred)
