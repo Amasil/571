@@ -1,0 +1,14 @@
+import numpy as np
+
+dci_scores_2020 = [48.784, 96.013, 90.482, 84.105, 46.450, 77.690, 100.000, 93.693, 95.146, 48.353, 75.099]
+sdi_scores_2020 = [73.2, 84.6, 78.2, 73.9, 70.9, 79.2, 76.4, 84.7, 84.7, 63.4, 79.2]
+
+dci_scores_2019 = [56.044, 95.225, 90.836, 84.292, 56.126, 86.026, 100.000, 94.648, 96.070, 60.865, 82.775]
+sdi_scores_2019 = [72.4, 85.2, 77.9, 73.2, 69.6, 79.5, 74.5, 78.8, 85.0, 61.5, 78.9]
+
+# Calculate the Pearson correlation coefficient
+correlation_coefficient_2019 = np.corrcoef(dci_scores_2019, sdi_scores_2019)[0, 1]
+correlation_coefficient_2020 = np.corrcoef(dci_scores_2020, sdi_scores_2020)[0, 1]
+
+print("Pearson Correlation Coefficient 2019:", correlation_coefficient_2019)
+print("Pearson Correlation Coefficient 2020:", correlation_coefficient_2020)
