@@ -15,6 +15,10 @@ data = {
 }
 df = pd.DataFrame(data)
 
+# Asking users for new input
+new_dci = float(input("Enter the new DCI value: "))
+new_cases_per_1000 = float(input("Enter the new Cases Per 1000 value: "))
+
 # Calculating the coefficients for the linear regression model
 X = np.array(df[['DCI', 'CasesPer1000']])
 y = np.array(df['SDI'])
@@ -28,27 +32,24 @@ beta = np.linalg.inv(X_with_intercept.T.dot(X_with_intercept)).dot(X_with_interc
 # Making predictions
 y_pred = X_with_intercept.dot(beta)
 
-# Visualizing the relationship between DCI, CasesPer1000, and SDI
-plt.figure(figsize=(10, 6))
-plt.scatter(df['DCI'], df['SDI'], color='blue', label='Actual')
-plt.scatter(df['DCI'], y_pred, color='red', label='Predicted')
-plt.xlabel('Digital Competitive Index (DCI)')
-plt.ylabel('Sustainable Development Index (SDI)')
-plt.title('Actual vs. Predicted SDI based on DCI')
-plt.legend()
-plt.grid(True)
-plt.show()
-
 # Printing model coefficients
 print('Model Coefficients:')
 print('Intercept:', beta[0])
 print('DCI Coefficient:', beta[1])
 print('CasesPer1000 Coefficient:', beta[2])
 
-# Asking users for new input
-new_dci = float(input("Enter the 2020 DCI value: "))
-new_cases_per_1000 = float(input("Enter the Cases Per 1000 value: "))
-
 # Predict SDI using the trained model
 new_sdi_pred = beta[0] + beta[1] * new_dci + beta[2] * new_cases_per_1000
-print('Predicted SDI for 2020:', new_sdi_pred)
+print('Predicted SDI for new data:', new_sdi_pred)
+
+# Visualizing the relationship between DCI, CasesPer1000, and SDI
+plt.figure(figsize=(10, 6))
+plt.scatter(df['DCI'], df['SDI'], color='blue', label='Actual')
+plt.scatter(df['DCI'], y_pred, color='red', label='Predicted')
+plt.scatter(new_dci, new_sdi_pred, color='green', label='New Data')
+plt.xlabel('Digital Competitive Index (DCI)')
+plt.ylabel('Sustainable Development Index (SDI)')
+plt.title('Actual vs. Predicted SDI based on DCI')
+plt.legend()
+plt.grid(True)
+plt.show()
