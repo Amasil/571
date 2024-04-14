@@ -62,9 +62,10 @@ To run a Python file containing the provided code:
 
     `Calculate_Mean_R-SQ_Absolute_Error.py`
 
+    'k_means_clusterofcountries.py'
 
 
-3. **View Output**: Depending on the code in the Python file, it may generate output such as plots or printed results. Check the output as specified in the file.
+4. **View Output**: Depending on the code in the Python file, it may generate output such as plots or printed results. Check the output as specified in the file.
 
 ## Additional Notes
 
